@@ -1,4 +1,4 @@
-package src.main.java.com.ml.algorithms.DDPG;
+package src.DDPG;
 
 import javax.swing.*;
 import java.awt.*;

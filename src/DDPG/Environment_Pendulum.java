@@ -1,4 +1,4 @@
-package src.main.java.com.ml.algorithms.DDPG;
+package src.DDPG;
 
 public class Environment_Pendulum {
     public int actionSpace = DDPG.maxTorque;

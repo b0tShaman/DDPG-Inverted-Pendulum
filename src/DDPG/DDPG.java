@@ -1,8 +1,8 @@
-package src.main.java.com.ml.algorithms.DDPG;
+package src.DDPG;
 
-import src.main.java.com.ml.algorithms.Common.InputNeuron;
-import src.main.java.com.ml.algorithms.Common.Neuron;
-import src.main.java.com.ml.algorithms.Common.NeuronBase;
+import src.Common.InputNeuron;
+import src.Common.Neuron;
+import src.Common.NeuronBase;
 
 import javax.swing.*;
 import java.io.*;

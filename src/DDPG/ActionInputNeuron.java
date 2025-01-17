@@ -1,6 +1,6 @@
-package src.main.java.com.ml.algorithms.DDPG;
+package src.DDPG;
 
-import src.main.java.com.ml.algorithms.Common.NeuronBase;
+import src.Common.NeuronBase;
 
 public class ActionInputNeuron extends NeuronBase {
 

@@ -1,4 +1,4 @@
-package src.main.java.com.ml.algorithms.Common;
+package src.Common;
 
 public class InputNeuron extends NeuronBase {
 
