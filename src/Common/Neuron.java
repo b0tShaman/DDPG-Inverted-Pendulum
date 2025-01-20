@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import src.DDPG.DDPG;
+
 public class Neuron extends NeuronBase {
     public static double polyak = 0.995;
     List<NeuronBase> L_prev = null;
@@ -271,7 +273,7 @@ public class Neuron extends NeuronBase {
             Df_Prev = new double[p];
             try {
                 List<List<String>> records1 = new ArrayList<>();
-                try (BufferedReader br1 = new BufferedReader(new FileReader("src/main/java/com/ml/algorithms/DDPG/" +memoryFileName + ".csv"))) {
+                try (BufferedReader br1 = new BufferedReader(new FileReader(DDPG.Filepath +memoryFileName + ".csv"))) {
                     String line1;
                     while ((line1 = br1.readLine()) != null) {
                         String[] values1 = line1.split(",");
@@ -419,7 +421,7 @@ public class Neuron extends NeuronBase {
     }
     public void Memorize(){
         try {
-            File statsFile = new File( "src/main/java/com/ml/algorithms/DDPG/" + memoryFileName+ ".csv");
+            File statsFile = new File( DDPG.Filepath + memoryFileName+ ".csv");
             if (statsFile.exists()) {
             } else {
                 FileWriter out = new FileWriter(statsFile);
@@ -428,7 +430,7 @@ public class Neuron extends NeuronBase {
             }
 
             if (statsFile.exists()) {
-                FileWriter buf = new FileWriter("src/main/java/com/ml/algorithms/DDPG/" + memoryFileName+ ".csv", true);
+                FileWriter buf = new FileWriter(DDPG.Filepath + memoryFileName+ ".csv", true);
                 for (double v1 : W) {
                     buf.append(String.valueOf(v1)).append(",");
                 }

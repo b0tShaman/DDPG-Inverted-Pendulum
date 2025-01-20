@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.*;
 
 public class DDPG {
-    static boolean train = false;
+    static boolean train = true;
     static int Length_Of_Pendulum = 1;//0.326;
     static double Mass_Of_Pendulum = 0.1;
     static double g = 10; // acceleration due to gravity
@@ -17,6 +17,7 @@ public class DDPG {
     static double initial_angular_velocity_of_pendulum = 0;
     public static int maxTorque = 2; // action space. Heavier the pendulum more the torque needed to balance(difficult to train)
     static int fps = 30; // frames per second for pendulum animation
+    public static String Filepath = "./src/DDPG/"; // path to store weights of Neural Networks
 
     int M = 200; // number of times to interact with environment to create trainingSet.csv. Critic and Actor networks are trained alternatively.
     int maxEpisodeRewardRequired = -150; // the reward, which on attaining, training stops and weights of Neural networks are stored
@@ -167,7 +168,7 @@ public class DDPG {
                     trainCritic = swap;
                 }
 
-                File trainingDataFile = new File("src/main/java/com/ml/algorithms/DDPG/trainingData.csv");
+                File trainingDataFile = new File(Filepath + "trainingData.csv");
                 if (trainingDataFile.exists()) {
                     boolean delete = trainingDataFile.delete();
                     //System.out.println("trainingDataFile.delete() - " + v + " " + delete);
@@ -202,7 +203,7 @@ public class DDPG {
                 avgRewardList.add(episodeReward);
                 // if (episodeReward > maxEpisodeRewardRequired) break;
                 List<List<String>> trainingSet = new ArrayList<>();
-                try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/ml/algorithms/DDPG/trainingData.csv"))) {
+                try (BufferedReader br = new BufferedReader(new FileReader(Filepath + "trainingData.csv"))) {
                     String line;
                     while ((line = br.readLine()) != null) {
                         String[] values = line.split(",");
@@ -315,20 +316,20 @@ public class DDPG {
 
         // Store Neural Network weights
         if( train) {
-            File statsFile = new File("src/main/java/com/ml/algorithms/DDPG/Actor.csv");
+            File statsFile = new File(Filepath + "actor.csv");
             if (statsFile.exists()) {
                 System.out.println("statsFile.delete() - " + statsFile.delete());
             }
-            File statsFile2 = new File("src/main/java/com/ml/algorithms/DDPG/TargetActor.csv");
+            File statsFile2 = new File(Filepath + "targetActor.csv");
             if (statsFile2.exists()) {
                 System.out.println("statsFile2.delete() - " + statsFile2.delete());
             }
-            File statsFile3 = new File("src/main/java/com/ml/algorithms/DDPG/Critic.csv");
+            File statsFile3 = new File(Filepath +"critic.csv");
             if (statsFile3.exists()) {
                 System.out.println("statsFile3.delete() - " + statsFile3.delete());
             }
 
-            File statsFile4 = new File("src/main/java/com/ml/algorithms/DDPG/TargetCritic.csv");
+            File statsFile4 = new File(Filepath +"targetCritic.csv");
             if (statsFile4.exists()) {
                 System.out.println("statsFile4.delete() - " + statsFile4.delete());
             }
@@ -804,7 +805,7 @@ public class DDPG {
     // Store training data after interacting with Environment
     public void StoreTrainingData(List<Double> s_t, double at, double reward, List<Double> s_tNext){
         try {
-            File statsFile = new File("src/main/java/com/ml/algorithms/DDPG/trainingData.csv");
+            File statsFile = new File(Filepath + "trainingData.csv");
             if (statsFile.exists()) {
             } else {
                 FileWriter out = new FileWriter(statsFile);
@@ -813,7 +814,7 @@ public class DDPG {
             }
 
             if (statsFile.exists()) {
-                FileWriter buf = new FileWriter("src/main/java/com/ml/algorithms/DDPG/trainingData.csv", true);
+                FileWriter buf = new FileWriter(Filepath+ "trainingData.csv", true);
                 for (Double integer : s_t) {
                     buf.append(String.valueOf(integer));
                     buf.append(";");

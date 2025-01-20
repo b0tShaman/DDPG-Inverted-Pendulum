@@ -42,6 +42,9 @@ Here are the main configurable variables in the code that control the behavior o
 - `discount` (double):  
   The discount factor for future rewards. Default value is `0.99`.
 
+- `Filepath` (double):  
+  The path to store TrainingData.csv and Neural Network weights.
+
 ## Training Process
 
 1. **Enable Training:**
@@ -75,4 +78,4 @@ Here are the main configurable variables in the code that control the behavior o
            
 
 4. **Weights Storage:**
-   The weights of the neural networks are saved in the src/DDPG folder after the training process completes. The training process will automatically stop once the `maxEpisodeRewardRequired` is attained
+   The weights of the neural networks are saved at `Filepath` after the training process completes. The training process will automatically stop once the `maxEpisodeRewardRequired` is attained
