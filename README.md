@@ -42,8 +42,8 @@ Here are the main configurable variables in the code that control the behavior o
 - `discount` (double):  
   The discount factor for future rewards. Default value is `0.99`.
 
-- `Filepath` (double):  
-  The path to store TrainingData.csv and Neural Network weights.
+- `Filepath` (string):  
+  The path to store Training Data and Neural Network weights.
 
 ## Training Process
 
