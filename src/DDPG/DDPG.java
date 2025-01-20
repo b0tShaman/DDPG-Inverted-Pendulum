@@ -181,7 +181,7 @@ public class DDPG {
                 for (double i = 0; i < EPISODES; i = i + 0.05) {
                     List<Double> curr_state_NN_Input = currStateToInput(curr_state);
                     feedForward_Policy_Network(curr_state_NN_Input, 0);
-                    double at = policy_Output_Layer.getFirst().getOutput();
+                    double at = policy_Output_Layer.get(0).getOutput();
 
                     // convert to force
                     double force = sampleAction(at);
@@ -242,11 +242,11 @@ public class DDPG {
                                     List<Double> s_1 = stringToList(data.get(3));
 
                                     feedForward_Policy_Target_Network(s_1, batchIndex);
-                                    double at_1 = policy_target_Output_Layer.getFirst().getOutput();
+                                    double at_1 = policy_target_Output_Layer.get(0).getOutput();
 
                                     List<Double> s_1_copy_1 = deepCopyList(s_1);
                                     feedForward_Critic_Target_Network(s_1_copy_1, batchIndex, new ActionInputNeuron(sampleAction(at_1))); //
-                                    double Q_at_1 = target_Output_Layer.getFirst().getOutput();
+                                    double Q_at_1 = target_Output_Layer.get(0).getOutput();
 
                                     if (reward == 0) {
                                         System.out.println("TERMINOLO !!! ");
@@ -257,7 +257,7 @@ public class DDPG {
                                     List<Double> s_copy = deepCopyList(s);
                                     ActionInputNeuron actionInputNeuron = new ActionInputNeuron(sampleAction(action));
                                     feedForward_Critic_Network(s_copy, batchIndex, actionInputNeuron);
-                                    double Q_action = critic_Output_Layer.getFirst().getOutput();
+                                    double Q_action = critic_Output_Layer.get(0).getOutput();
                                     Critic_Loss_Batch[batchIndex] = (yi - Q_action);
                                 } catch (Exception e) {
                                     System.out.println("Exception " + e);
@@ -356,7 +356,7 @@ public class DDPG {
                 List<Double> curr_state_NN_Input = currStateToInput(curr_state);//stateSpaceToInput(stateSpaceQuantization);
                 feedForward_Policy_Network(curr_state_NN_Input,0);
 
-                double at = policy_Output_Layer.getFirst().getOutput();
+                double at = policy_Output_Layer.get(0).getOutput();
 
                 // convert to force
                 double force = sampleAction(at);
@@ -410,7 +410,7 @@ public class DDPG {
         concat.addAll(critic_L2_Layer);
         prev_Layer = concat;
 
-        critic_Output_Layer.getFirst().feedForward(prev_Layer,batchIndex );
+        critic_Output_Layer.get(0).feedForward(prev_Layer,batchIndex );
         //clearCache();
     }
 
@@ -484,7 +484,7 @@ public class DDPG {
             prev_Layer= policy_target_L2_Layer;
         }
 
-        policy_target_Output_Layer.getFirst().feedForward(prev_Layer,batchIndex );
+        policy_target_Output_Layer.get(0).feedForward(prev_Layer,batchIndex );
     }
 
     // Forward Propagation of Actor's Q Network
@@ -516,11 +516,11 @@ public class DDPG {
             prev_Layer= policy_L2_Layer;
         }
 
-        policy_Output_Layer.getFirst().feedForward(prev_Layer,batchIndex );
+        policy_Output_Layer.get(0).feedForward(prev_Layer,batchIndex );
     }
 
     public void feedback_Policy_Network(int batchIndex, double advantage, int epoch){
-        policy_Output_Layer.getFirst().setError_Next(advantage);
+        policy_Output_Layer.get(0).setError_Next(advantage);
 
         if (!policy_Output_Layer.isEmpty()) {
             for (NeuronBase neuronBase : policy_Output_Layer) {
@@ -543,7 +543,7 @@ public class DDPG {
 
     public void feedback_Critic_Network(int batchIndex, double error, int epoch) throws InterruptedException {
 
-        critic_Output_Layer.getFirst().setError_Next(error);
+        critic_Output_Layer.get(0).setError_Next(error);
 
         if (!critic_Output_Layer.isEmpty()) {
             for (NeuronBase neuronBase : critic_Output_Layer) {
@@ -566,7 +566,7 @@ public class DDPG {
 
     public void Backpropagate_Gradients_Critic_Network(int batchIndex, double error, int epoch){
 
-        critic_Output_Layer.getFirst().setError_Next(error);
+        critic_Output_Layer.get(0).setError_Next(error);
 
         if (!critic_Output_Layer.isEmpty()) {
             for (NeuronBase neuronBase : critic_Output_Layer) {
