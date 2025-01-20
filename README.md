@@ -4,7 +4,7 @@ This project implements the Deep Deterministic Policy Gradient (DDPG) algorithm 
 
 ## Key Variables
 
-Here are the main configurable variables in the code that control the behavior of the simulation and the training process:
+Here are the main configurable variables in the code (DDPG.java) that control the behavior of the simulation and the training process:
 
 - `train` (boolean):  
   Set this to `true` to enable training. Once the training is complete, set it to `false` to stop training and begin using the trained model.
