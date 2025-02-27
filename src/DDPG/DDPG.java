@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.*;
 
 public class DDPG {
-    static boolean train = true;
+    static boolean train = false;
     static int Length_Of_Pendulum = 1;//0.326;
     static double Mass_Of_Pendulum = 0.1;
     static double g = 10; // acceleration due to gravity
@@ -53,6 +53,13 @@ public class DDPG {
     List<NeuronBase> target_Output_Layer = new ArrayList<>();
 
     public static void main(String[] args) throws Exception{
+        if (args.length > 0) {
+            // Convert the argument to boolean
+            boolean flag = Boolean.parseBoolean(args[0]);
+            if (flag) {
+                train = true;
+            }
+        }
         DDPG ddpg = new DDPG();
         ddpg.DeepDeterministicPolicyGradient();
     }
