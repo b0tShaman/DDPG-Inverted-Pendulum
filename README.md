@@ -46,6 +46,33 @@ Here are the main configurable variables in the code (DDPG.java) that control th
 - `Filepath` (string):  
   The path to store Training Data and Neural Network weights.
 
+
+## How to Run
+
+### Clone the Repository
+```bash
+git clone https://github.com/b0tShaman/DDPG-Inverted-Pendulum.git
+cd DDPG-Inverted-Pendulum
+```
+
+### Compile and Run
+
+#### Option 1: Using an IDE
+1. Open the project in your preferred IDE.
+2. Build the project to resolve dependencies.
+3. Run the `DDPG.java` class to train and visualize the Inverted Pendulum animation.
+
+#### Option 2: Using the Command Line
+1. Navigate to the project root.
+2. Compile the Java files:
+   ```bash
+   javac -d bin src/DDPG/DDPG.java
+   ```
+3. Run the main class (Pass true as arg to enable training):
+   ```bash
+   java -cp bin src/DDPG/DDPG true
+   ```
+
 ## Training Process
 
 1. **Enable Training:**
