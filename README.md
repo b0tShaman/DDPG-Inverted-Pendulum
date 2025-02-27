@@ -1,6 +1,7 @@
 # DDPG Inverted Pendulum Java
 
 This project implements the Deep Deterministic Policy Gradient (DDPG) algorithm to solve the Inverted Pendulum problem. The pendulum is simulated, and the algorithm is trained to balance the pendulum in the upright position.
+![Demo](assets/demo.gif)
 
 ## Key Variables
 
